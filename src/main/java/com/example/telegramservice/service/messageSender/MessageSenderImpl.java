@@ -19,7 +19,6 @@ public class MessageSenderImpl implements MessageSender {
     @Override
     public void sendMessage(SendMessage sendMessage) {
         try {
-            System.out.println("our botb " + bot);
             bot.execute(sendMessage);
         } catch (TelegramApiException e) {
             log.debug(e.toString());

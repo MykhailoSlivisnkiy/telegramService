@@ -1,6 +1,8 @@
 package com.example.telegramservice.service;
 
 import com.example.telegramservice.config.BotConfig;
+import com.example.telegramservice.constant.TelegramConstant;
+import com.example.telegramservice.dto.SubscriptionRequest;
 import com.example.telegramservice.service.messageSender.BotMessageBuilder;
 import com.example.telegramservice.service.messageSender.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,10 @@ public class Bot extends TelegramLongPollingBot {
         this.config = config;
     }
 
-    public void send(String text) {
+    public void send(SubscriptionRequest subscriptionRequest) {
         var message = SendMessage.builder()
-                .chatId(test)
-                .text(text)
+                .chatId(subscriptionRequest.getDestination())
+                .text(String.format(TelegramConstant.SUBSCRIBE_SUCCESS, subscriptionRequest.getShopName()))
                 .build();
 
         messageSender.sendMessage(message);
